@@ -1,9 +1,27 @@
 'use strict'
 
-module.exports.booksReducers = (state = {books: []}, action) => {
+module.exports.booksReducers = (
+  state = {
+    books: [{
+      id: 1,
+      title: 'title',
+      description: 'description',
+      price: 30.00
+    },
+    {
+      id: 2,
+      title: 'title 2',
+      description: 'description 2',
+      price: 10.00
+    }]
+  },
+  action
+) => {
   let currentBooks
   let index = 0
   switch (action.type) {
+    case 'GET_BOOKS':
+      return {...state, books: [ ...state.books ]}
     case 'POST_BOOK':
       return {books: [...state.books, ...action.payload]} // concat arrays using spread op; return updated state
     case 'DELETE_BOOK':
@@ -18,8 +36,8 @@ module.exports.booksReducers = (state = {books: []}, action) => {
       index = currentBooks.findIndex(book => {
         return book.id === action.payload.id
       })
-      let updateBook = currentBooks[index].title = action.payload.title
-      return {books: [...currentBooks.slice(0, index), updateBook,
+      const updatedBook = {...currentBooks[index], ...action.payload}
+      return {books: [...currentBooks.slice(0, index), updatedBook,
         ...currentBooks.slice(index + 1)]}
   }
   return state

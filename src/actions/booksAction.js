@@ -1,5 +1,11 @@
 'use strict'
 
+let getBooks = (books) => {
+  return {
+    type: 'GET_BOOKS'
+  }
+}
+
 let postToBooks = (books) => {
   return {
     type: 'POST_BOOK',
@@ -22,6 +28,7 @@ let deleteBook = (book) => {
 }
 
 module.exports = {
+  getBooks: getBooks,
   postToBooks: postToBooks,
   updateBook: updateBook,
   deleteBook: deleteBook

@@ -16,21 +16,21 @@ const store = storeWithMiddleware(reducers)
 ReactDOM.render(
   <Provider store={store}>
     <BooksList />
-  </Provider>
-  , document.getElementById('root'))
+  </Provider>,
+  document.getElementById('root'))
 
-store.dispatch(
+/* store.dispatch(
   booksAction.postToBooks(
     [{
       id: 1,
       title: 'title',
-      decription: 'description',
+      description: 'description',
       price: 30.00
     },
     {
       id: 2,
       title: 'title 2',
-      decription: 'description 2',
+      description: 'description 2',
       price: 10.00
     }]
   )
@@ -53,4 +53,4 @@ store.dispatch(
   addToCart([{
     id: 2
   }])
-)
+) */
