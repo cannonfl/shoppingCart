@@ -2,10 +2,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {Grid, Row, Col, Button} from 'react-bootstrap'
+import {Grid, Row, Col} from 'react-bootstrap'
+import uuidv1 from 'uuid/v1'
 import {getBooks} from '../../actions/booksAction'
 import BookItem from './bookItem'
 import BooksForm from './booksForm'
+import Cart from './cart'
 
 class BooksList extends React.Component {
   componentDidMount () {
@@ -15,7 +17,7 @@ class BooksList extends React.Component {
   render () {
     const booksList = this.props.books.map(book => {
       return (
-        <Col xs={12} sm={6} md={4} key={book.id}>
+        <Col xs={12} sm={6} md={4} key={uuidv1()}>
           <BookItem
             id={book.id}
             title={book.title}
@@ -27,6 +29,9 @@ class BooksList extends React.Component {
     })
     return (
       <Grid>
+        <Row>
+          <Cart />
+        </Row>
         <Row>
           <Col xs={12} sm={6}>
             <BooksForm />
@@ -43,12 +48,7 @@ function mapStateToProps (state) {
   }
 }
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(
-    {
-      getBooks: getBooks
-    },
-    dispatch
-  )
+  return bindActionCreators({getBooks}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList)

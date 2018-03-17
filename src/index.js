@@ -1,56 +1,32 @@
 'use strict'
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import logger from 'redux-logger'
 
-import BooksList from './components/pages/booksList'
 import reducers from './reducers'
-import {addToCart} from './actions/cartAction'
-import booksAction from './actions/booksAction'
+import BooksList from './components/pages/booksList'
+import Cart from './components/pages/cart'
+import BooksForm from './components/pages/booksForm'
+import Main from './main'
 
 const storeWithMiddleware = applyMiddleware(logger)(createStore)
 const store = storeWithMiddleware(reducers)
 
-ReactDOM.render(
+const Routes = (
   <Provider store={store}>
-    <BooksList />
-  </Provider>,
-  document.getElementById('root'))
-
-/* store.dispatch(
-  booksAction.postToBooks(
-    [{
-      id: 1,
-      title: 'title',
-      description: 'description',
-      price: 30.00
-    },
-    {
-      id: 2,
-      title: 'title 2',
-      description: 'description 2',
-      price: 10.00
-    }]
-  )
+    <Router history={browserHistory}>
+      <Route path='/' component={Main}>
+        <IndexRoute component={BooksList} />
+        <Route path='/admin' component={BooksForm} />
+        <Route path='/cart' component={Cart} />
+      </Route>
+    </Router>
+  </Provider>
 )
 
-store.dispatch(
-  booksAction.updateBook({
-    id: 2,
-    title: 'You are a jerk!'
-  })
+render(
+  Routes, document.getElementById('root')
 )
-
-store.dispatch(
-  booksAction.deleteBook({
-    id: 1
-  })
-)
-
-store.dispatch(
-  addToCart([{
-    id: 2
-  }])
-) */

@@ -7,7 +7,7 @@ let app = express()
 // Middleware to define folder to static files and images
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 

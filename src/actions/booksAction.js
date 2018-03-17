@@ -6,7 +6,7 @@ let getBooks = (books) => {
   }
 }
 
-let postToBooks = (books) => {
+let postBooks = (books) => {
   return {
     type: 'POST_BOOK',
     payload: books
@@ -29,7 +29,7 @@ let deleteBook = (book) => {
 
 module.exports = {
   getBooks: getBooks,
-  postToBooks: postToBooks,
+  postBooks: postBooks,
   updateBook: updateBook,
   deleteBook: deleteBook
 }
